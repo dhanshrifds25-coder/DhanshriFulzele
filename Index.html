@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Digital Daily Reflection Journal</title>
+
+    <style>
+        body {
+            font-family: Arial;
+            background-color: #f5f0ff;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            background-color: white;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: purple;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        textarea, select, input {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .save {
+            background-color: purple;
+            color: white;
+        }
+
+        .clear {
+            background-color: lightgray;
+        }
+
+        .delete {
+            background-color: crimson;
+            color: white;
+        }
+
+        .journal {
+            background-color: #f0e8ff;
+            padding: 15px;
+            margin-top: 15px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🌸 Daily Reflection Journal</h1>
+
+    <label>Date:</label>
+    <input type="date" id="date">
+
+    <label>How are you feeling today?</label>
+    <select id="mood">
+        <option>😊 Happy</option>
+        <option>😌 Calm</option>
+        <option>😐 Okay</option>
+        <option>😔 Sad</option>
+        <option>😡 Angry</option>
+        <option>😴 Tired</option>
+    </select>
+
+    <label>Today's Highlight:</label>
+    <textarea id="highlight"></textarea>
+
+    <label>Today's Challenge:</label>
+    <textarea id="challenge"></textarea>
+
+    <label>What am I grateful for?</label>
+    <textarea id="gratitude"></textarea>
+
+    <label>What did I learn today?</label>
+    <textarea id="learning"></textarea>
+
+    <label>Goals for Tomorrow:</label>
+    <textarea id="tomorrow"></textarea>
+
+    <label>Rate Your Day:</label>
+    <input type="range" id="rating" min="1" max="10">
+
+    <button class="save" onclick="saveJournal()">Save Reflection</button>
+    <button class="clear" onclick="clearForm()">Clear</button>
+
+    <h2>📖 Saved Journal</h2>
+
+    <div id="savedJournal"></div>
+
+</div>
+
+<script>
+
+function saveJournal() {
+
+    let journal = {
+        date: document.getElementById("date").value,
+        mood: document.getElementById("mood").value,
+        highlight: document.getElementById("highlight").value,
+        challenge: document.getElementById("challenge").value,
+        gratitude: document.getElementById("gratitude").value,
+        learning: document.getElementById("learning").value,
+        tomorrow: document.getElementById("tomorrow").value,
+        rating: document.getElementById("rating").value
+    };
+
+    let journals = JSON.parse(localStorage.getItem("journals")) || [];
+
+    journals.push(journal);
+
+    localStorage.setItem("journals", JSON.stringify(journals));
+
+    displayJournals();
+
+    alert("Reflection saved successfully!");
+
+    clearForm();
+}
+
+function displayJournals() {
+
+    let journals = JSON.parse(localStorage.getItem("journals")) || [];
+
+    let output = "";
+
+    for (let i = 0; i < journals.length; i++) {
+
+        output +=
+        "<div class='journal'>" +
+        "<b>Date:</b> " + journals[i].date + "<br>" +
+        "<b>Mood:</b> " + journals[i].mood + "<br>" +
+        "<b>Highlight:</b> " + journals[i].highlight + "<br>" +
+        "<b>Challenge:</b> " + journals[i].challenge + "<br>" +
+        "<b>Gratitude:</b> " + journals[i].gratitude + "<br>" +
+        "<b>Learning:</b> " + journals[i].learning + "<br>" +
+        "<b>Tomorrow's Goal:</b> " + journals[i].tomorrow + "<br>" +
+        "<b>Day Rating:</b> " + journals[i].rating + "/10" +
+        "</div>";
+    }
+
+    document.getElementById("savedJournal").innerHTML = output;
+}
+
+function clearForm() {
+
+    document.getElementById("date").value = "";
+    document.getElementById("highlight").value = "";
+    document.getElementById("challenge").value = "";
+    document.getElementById("gratitude").value = "";
+    document.getElementById("learning").value = "";
+    document.getElementById("tomorrow").value = "";
+}
+
+displayJournals();
+
+</script>
+
+</body>
+</html>
