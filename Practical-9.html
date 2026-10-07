@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>To-Do List</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-8">
+
+  <div class="max-w-md mx-auto bg-white p-6 rounded-lg shadow">
+    <h2 class="text-2xl font-bold text-center mb-4">My To-Do List</h2>
+
+    <div class="flex gap-2">
+      <input id="task" type="text"
+        placeholder="Enter a task"
+        class="border p-2 flex-1 rounded">
+
+      <button id="add"
+        class="bg-blue-500 text-white px-4 rounded">
+        Add
+      </button>
+    </div>
+
+    <ul id="list" class="mt-4"></ul>
+  </div>
+
+  <script>
+    let input = document.getElementById("task");
+    let list = document.getElementById("list");
+
+    document.getElementById("add").addEventListener("click", function() {
+      if (input.value.trim() === "") return;
+
+      let li = document.createElement("li");
+      li.className = "flex justify-between items-center bg-gray-100 p-2 mb-2 rounded";
+
+      li.innerHTML = `
+        <span>${input.value}</span>
+        <div>
+          <button class="complete bg-green-500 text-white px-2 py-1 rounded">✓</button>
+          <button class="delete bg-red-500 text-white px-2 py-1 rounded">✕</button>
+        </div>
+      `;
+
+      li.querySelector(".complete").addEventListener("click", function() {
+        li.querySelector("span").classList.toggle("line-through");
+      });
+
+      li.querySelector(".delete").addEventListener("click", function() {
+        li.remove();
+      });
+
+      list.appendChild(li);
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>
