@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Student Study Planner</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-4">
+
+  <div class="max-w-lg mx-auto bg-white p-6 rounded-xl shadow">
+    <h1 class="text-2xl font-bold text-center mb-2">
+      📚 Student Study Planner
+    </h1>
+
+    <p class="text-center text-gray-500 mb-5">
+      Organize your daily academic tasks
+    </p>
+
+    <div class="flex flex-col sm:flex-row gap-2">
+      <input id="task" type="text"
+        placeholder="Enter study task"
+        class="border p-3 rounded flex-1">
+
+      <button id="add"
+        class="bg-blue-600 text-white px-5 py-3 rounded">
+        Add Task
+      </button>
+    </div>
+
+    <ul id="list" class="mt-5"></ul>
+  </div>
+
+  <script>
+    let input = document.getElementById("task");
+    let list = document.getElementById("list");
+
+    document.getElementById("add").addEventListener("click", function() {
+
+      if (input.value.trim() === "") {
+        alert("Please enter a task");
+        return;
+      }
+
+      let li = document.createElement("li");
+
+      li.className =
+        "flex justify-between items-center bg-gray-100 p-3 mb-2 rounded";
+
+      li.innerHTML = `
+        <span>${input.value}</span>
+        <div class="flex gap-2">
+          <button class="done bg-green-500 text-white px-2 py-1 rounded">
+            ✓
+          </button>
+          <button class="del bg-red-500 text-white px-2 py-1 rounded">
+            ✕
+          </button>
+        </div>
+      `;
+
+      li.querySelector(".done").addEventListener("click", function() {
+        li.querySelector("span").classList.toggle("line-through");
+      });
+
+      li.querySelector(".del").addEventListener("click", function() {
+        li.remove();
+      });
+
+      list.appendChild(li);
+      input.value = "";
+    });
+  </script>
+
+</body>
+</html>
