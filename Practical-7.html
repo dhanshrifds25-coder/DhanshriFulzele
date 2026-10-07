@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>College FAQ</title>
+  <style>
+    body {
+      font-family: Arial;
+      width: 600px;
+      margin: 30px auto;
+    }
+
+    .question {
+      background: #eee;
+      padding: 15px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .answer {
+      display: none;
+      padding: 15px;
+      background: #f8f8f8;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>College FAQ</h2>
+
+  <div class="question">What are the college timings?</div>
+  <div class="answer">College timings are from 9:00 AM to 5:00 PM.</div>
+
+  <div class="question">How can I apply for leave?</div>
+  <div class="answer">You can apply for leave through the college portal.</div>
+
+  <div class="question">Where can I check my results?</div>
+  <div class="answer">You can check your results on the student portal.</div>
+
+  <script>
+    let questions = document.querySelectorAll(".question");
+
+    questions.forEach(function(question) {
+      question.addEventListener("click", function() {
+        let answer = question.nextElementSibling;
+
+        if (answer.style.display === "block")
+          answer.style.display = "none";
+        else
+          answer.style.display = "block";
+      });
+    });
+  </script>
+
+</body>
+</html>
