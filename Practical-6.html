@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Calculator</title>
+</head>
+<body>
+
+<h2>Student Grade Calculator</h2>
+
+<input id="m1" placeholder="Subject 1 marks">
+<input id="m2" placeholder="Subject 2 marks">
+<input id="m3" placeholder="Subject 3 marks">
+<button onclick="calculate()">Calculate</button>
+
+<p id="result"></p>
+
+<script>
+function calculate() {
+    let a = +document.getElementById("m1").value;
+    let b = +document.getElementById("m2").value;
+    let c = +document.getElementById("m3").value;
+
+    let total = a + b + c;
+    let percentage = total / 3;
+
+    let grade;
+    if (percentage >= 90) grade = "A+";
+    else if (percentage >= 80) grade = "A";
+    else if (percentage >= 70) grade = "B";
+    else if (percentage >= 60) grade = "C";
+    else if (percentage >= 50) grade = "D";
+    else grade = "F";
+
+    document.getElementById("result").innerHTML =
+        "Total: " + total + "/300<br>" +
+        "Percentage: " + percentage.toFixed(2) + "%<br>" +
+        "Grade: " + grade;
+}
+</script>
+
+</body>
+</html>
+
+Example: If marks are "85, 90, 80" → Total = 255/300, Percentage = 85%, Grade = A.
